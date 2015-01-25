@@ -1,0 +1,18 @@
+<section data-ng-controller="ChatController">
+	<div class="row">
+
+		<div class="col-lg-6">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Message..." ng-model="message.text">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="send(message)">Send!</button>
+      </span>
+			</div><!-- /input-group -->
+		</div><!-- /.col-lg-6 -->
+	</div><!-- /.row -->
+<ul>
+	<li ng-repeat="message in messages">
+		{{message.userinfo.displayName}} dice :{{message.text}}
+	</li>
+</ul>
+</section>
