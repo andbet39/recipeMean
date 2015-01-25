@@ -8,8 +8,8 @@ angular.module('chat').controller('ChatController', ['$scope','Chat','Authentica
 
 		$scope.send  = function(message){
 
-			message.userinfo=Authentication.user
-			Chat.create(message)
+			message.userinfo=Authentication.user;
+			Chat.create(message);
 			$scope.message ={};
 		}
 	}
