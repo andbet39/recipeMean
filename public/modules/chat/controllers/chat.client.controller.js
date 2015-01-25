@@ -11,6 +11,6 @@ angular.module('chat').controller('ChatController', ['$scope','Chat','Authentica
 			message.userinfo=Authentication.user;
 			Chat.create(message);
 			$scope.message ={};
-		}
+		};
 	}
 ]);
