@@ -26,6 +26,7 @@ exports.create = function(req, res) {
 	});
 };
 
+
 /**
  * Show the current Article
  */
