@@ -1,0 +1,28 @@
+<section data-ng-controller="EnquiresController">
+    <div class="page-header">
+        <h1>New Enquire</h1>
+    </div>
+
+         <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <div class="row">
+                <div class="large-6 columns">
+                    <label>Title</label>     
+                        <input type="text" data-ng-model="title" id="title" placeholder="Name" required>
+                </div>
+
+                <div class="row">
+                    <div class="large-8 columns">
+                      <label>Text
+                        <textarea data-ng-model="text" id="text" placeholder="text" reuired></textarea>
+                      </label>
+                    </div>
+                </div>  
+                     <input type="submit" class="button">
+ 
+ 				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </div>
+        </form>
+    </div>
+</section>

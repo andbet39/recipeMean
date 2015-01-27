@@ -5,104 +5,102 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	Article = mongoose.model('Article'),
+	Enquire = mongoose.model('Enquire'),
 	_ = require('lodash');
 
 /**
- * Create a Article
+ * Create a Enquire
  */
 exports.create = function(req, res) {
-	var article = new Article(req.body);
-	article.user = req.user;
-	
+	var enquire = new Enquire(req.body);
+	enquire.user = req.user;
 
-	article.save(function(err) {
+	enquire.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(article);
+			res.jsonp(enquire);
 		}
 	});
 };
 
-
 /**
- * Show the current Article
+ * Show the current Enquire
  */
 exports.read = function(req, res) {
-	res.jsonp(req.article);
+	res.jsonp(req.enquire);
 };
 
 /**
- * Update a Article
+ * Update a Enquire
  */
 exports.update = function(req, res) {
-	var article = req.article ;
+	var enquire = req.enquire ;
 
-	article = _.extend(article , req.body);
+	enquire = _.extend(enquire , req.body);
 
-	article.save(function(err) {
+	enquire.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(article);
+			res.jsonp(enquire);
 		}
 	});
 };
 
 /**
- * Delete an Article
+ * Delete an Enquire
  */
 exports.delete = function(req, res) {
-	var article = req.article ;
+	var enquire = req.enquire ;
 
-	article.remove(function(err) {
+	enquire.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(article);
+			res.jsonp(enquire);
 		}
 	});
 };
 
 /**
- * List of Articles
+ * List of Enquires
  */
 exports.list = function(req, res) { 
-	Article.find().sort('-created').populate('user', 'displayName').exec(function(err, articles) {
+	Enquire.find().sort('-created').populate('user', 'displayName').exec(function(err, enquires) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(articles);
+			res.jsonp(enquires);
 		}
 	});
 };
 
 /**
- * Article middleware
+ * Enquire middleware
  */
-exports.articleByID = function(req, res, next, id) { 
-	Article.findById(id).populate('user', 'displayName').exec(function(err, article) {
+exports.enquireByID = function(req, res, next, id) { 
+	Enquire.findById(id).populate('user', 'displayName').exec(function(err, enquire) {
 		if (err) return next(err);
-		if (! article) return next(new Error('Failed to load Article ' + id));
-		req.article = article ;
+		if (! enquire) return next(new Error('Failed to load Enquire ' + id));
+		req.enquire = enquire ;
 		next();
 	});
 };
 
 /**
- * Article authorization middleware
+ * Enquire authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.article.user.id !== req.user.id) {
+	if (req.enquire.user.id !== req.user.id) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();

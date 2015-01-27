@@ -5,104 +5,102 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	Article = mongoose.model('Article'),
+	Persone = mongoose.model('Persone'),
 	_ = require('lodash');
 
 /**
- * Create a Article
+ * Create a Persone
  */
 exports.create = function(req, res) {
-	var article = new Article(req.body);
-	article.user = req.user;
-	
+	var persone = new Persone(req.body);
+	persone.user = req.user;
 
-	article.save(function(err) {
+	persone.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(article);
+			res.jsonp(persone);
 		}
 	});
 };
 
-
 /**
- * Show the current Article
+ * Show the current Persone
  */
 exports.read = function(req, res) {
-	res.jsonp(req.article);
+	res.jsonp(req.persone);
 };
 
 /**
- * Update a Article
+ * Update a Persone
  */
 exports.update = function(req, res) {
-	var article = req.article ;
+	var persone = req.persone ;
 
-	article = _.extend(article , req.body);
+	persone = _.extend(persone , req.body);
 
-	article.save(function(err) {
+	persone.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(article);
+			res.jsonp(persone);
 		}
 	});
 };
 
 /**
- * Delete an Article
+ * Delete an Persone
  */
 exports.delete = function(req, res) {
-	var article = req.article ;
+	var persone = req.persone ;
 
-	article.remove(function(err) {
+	persone.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(article);
+			res.jsonp(persone);
 		}
 	});
 };
 
 /**
- * List of Articles
+ * List of Persones
  */
 exports.list = function(req, res) { 
-	Article.find().sort('-created').populate('user', 'displayName').exec(function(err, articles) {
+	Persone.find().sort('-created').populate('user', 'displayName').exec(function(err, persones) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(articles);
+			res.jsonp(persones);
 		}
 	});
 };
 
 /**
- * Article middleware
+ * Persone middleware
  */
-exports.articleByID = function(req, res, next, id) { 
-	Article.findById(id).populate('user', 'displayName').exec(function(err, article) {
+exports.personeByID = function(req, res, next, id) { 
+	Persone.findById(id).populate('user', 'displayName').exec(function(err, persone) {
 		if (err) return next(err);
-		if (! article) return next(new Error('Failed to load Article ' + id));
-		req.article = article ;
+		if (! persone) return next(new Error('Failed to load Persone ' + id));
+		req.persone = persone ;
 		next();
 	});
 };
 
 /**
- * Article authorization middleware
+ * Persone authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.article.user.id !== req.user.id) {
+	if (req.persone.user.id !== req.user.id) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();

@@ -1,0 +1,98 @@
+      <section data-ng-controller="EnquiresController" data-ng-init="find()">
+      <div class="row">
+          <div class="large-12 columns centered-text">
+              <h3>Latest Answer</h3>
+          </div>
+      </div>
+           <div  class="large-8 large-centered columns" data-ng-repeat="enquire in enquires" data-ng-href="#!/enquires/{{enquire._id}}">
+           <div class="row">
+              <div class="large-2 columns small-3">
+                    <img src="http://lorempixel.com/200/200/people/{{$index}}" />
+                    <span data-ng-bind="enquire.user.displayName"></span>
+
+              </div>
+              
+              <div class="large-10 columns">
+               <h3 data-ng-bind="enquire.title"></h3>
+                <p data-ng-bind="enquire.text"> </p>
+                <div class="row large-6 columns">
+                
+                <ul class=" inline-list">
+                   <li>Ci sono {{enquire.answers.length}} risposte</a></li>
+                </ul>
+                </div>
+                <div class="large-6 columns">
+                  <small class="list-group-item-text">
+                  Posted on
+                  <span data-ng-bind="enquire.created | date:'medium'"></span>
+              </small>
+                </div>
+            </div>
+        </div>
+      
+        <div class="row panel" data-ng-controller="AnswersController" data-ng-init="loadAnswer(enquire)">
+          <div class="large-10 large-offset-2 columns">
+              <div class="row " >
+                <form class="form-horizontal" data-ng-submit="createAnswer(enquire)" novalidate>
+
+                   <div class="large-6 columns">
+                      <input type="radio" name="pokemon" value="true" ng-model="answer.isPro"><label for="pokemonRed">PRO</label>
+                      <input type="radio" name="pokemon" value="false" ng-model="answer.isPro"><label for="pokemonBlue">CONS</label>
+                    </div>
+                  <div class="large-12 columns">
+                    <div class="row collapse">
+                      <div class="small-10 columns">
+                        <input type="text" name="answer.reason" ng-model="answer.reason" placeholder="Reason">
+                      </div>
+                      <div class="small-2 columns">
+                       <button class="button postfix">Vote</button>
+                      </div>
+                   </div>
+                  </div>
+                </form>
+              </div>
+                <br>
+                 <h5>Latest Pro&Cons</h5>
+                <div class="row" ng-repeat="answer in enquire.answers">
+                   
+                  <div class="large-2 columns small-3">      
+                    <p>
+                      <a class="th" href="../img/demos/demo2.png">
+                      <img src="http://lorempixel.com/200/200/people/{{$index+2}}" />
+                      </a>
+                    </p>
+                  </div>
+                    <div class="large-10 columns"><h5><strong>CONS</strong><h5><p>{{answer.reason}}</p>
+                    </div>
+                     <div class="large-6 columns">
+                  <small class="list-group-item-text">
+                  Posted on
+                  <span data-ng-bind="answer.created | date:'medium'"></span>
+              </small>
+                </div>
+                  </div>
+                </div>
+            </div>
+ 
+<br>
+<br>
+
+
+
+
+        <!--
+      <div class="list-group">
+          <a data-ng-repeat="enquire in enquires" data-ng-href="#!/enquires/{{enquire._id}}" class="list-group-item">
+  			<small class="list-group-item-text">
+  				Posted on
+  				<span data-ng-bind="enquire.created | date:'medium'"></span>
+  				by
+  				<span data-ng-bind="enquire.user.displayName"></span>
+  			</small>
+  			<h4 class="list-group-item-heading" data-ng-bind="enquire.title"></h4>
+          </a>
+      </div>
+      <div class="alert alert-warning text-center" data-ng-hide="!enquires.$resolved || enquires.length">
+      	No Enquires yet, why don't you <a href="/#!/enquires/create">create one</a>?
+      </div>-->
+  </section>
