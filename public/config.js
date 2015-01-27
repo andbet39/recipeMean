@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'recipemean';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'firebase' , 'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.utils'];
+	var applicationModuleVendorDependencies = ['ngResource','ngCookies', 'firebase' , 'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.utils'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {

@@ -6,9 +6,9 @@ angular.module('enquires').controller('EnquiresController', ['$scope','$http', '
 		$scope.authentication = Authentication;
 
 		$scope.answers ='';
-
+ 
 		$scope.loadAnswer = function(enquire){
-				console.log("loading answer for "+  enquire._id);
+				console.log('loading answer for '+  enquire._id);
 
 				$http.get('/enquireAnswer/'+ enquire._id).
 					  success(function(data, status, headers, config) {

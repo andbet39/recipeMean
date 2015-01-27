@@ -16,6 +16,7 @@
 		"angular-ui-router": "~0.2.11",
 		"foundation": "latest",
 		"angularfire":"latest",
-		"firebase":"lastest"
+		"firebase":"lastest",
+		"foundation-icon-fonts":"latest"
 	}
 }

@@ -15,7 +15,9 @@ module.exports = {
 			css: [
 				//'public/lib/bootstrap/dist/css/bootstrap.css',
 				//'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-				'public/lib/foundation/css/foundation.css'
+				'public/lib/foundation/css/foundation.css',
+			    'public/lib/foundation-icon-fonts/foundation-icons.css'
+
 			],
 			js: [
 				'public/lib/jquery/dist/jquery.js',

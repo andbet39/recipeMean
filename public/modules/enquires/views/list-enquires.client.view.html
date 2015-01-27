@@ -30,9 +30,10 @@
             </div>
         </div>
       
-        <div class="row panel" data-ng-controller="AnswersController" data-ng-init="loadAnswer(enquire)">
+        <div class="row " data-ng-controller="AnswersController" data-ng-init="loadAnswer(enquire)">
           <div class="large-10 large-offset-2 columns">
-              <div class="row " >
+              <div class="row panel" >
+              <h3>Inserisci il tuo PRO or CONS </h3>
                 <form class="form-horizontal" data-ng-submit="createAnswer(enquire)" novalidate>
 
                    <div class="large-6 columns">
@@ -53,7 +54,7 @@
               </div>
                 <br>
                  <h5>Latest Pro&Cons</h5>
-                <div class="row" ng-repeat="answer in enquire.answers">
+                <div class="row" ng-repeat="answer in enquire.answers | limitTo:amount" class="answer">
                    
                   <div class="large-2 columns small-3">      
                     <p>
@@ -62,7 +63,10 @@
                       </a>
                     </p>
                   </div>
-                    <div class="large-10 columns"><h5><strong>CONS</strong><h5><p>{{answer.reason}}</p>
+                    <div class="large-10 columns"><p>
+                      <i ng-show="{{answer.isPro}}" class="pro fi-check"></i>
+                      <i ng-hide="{{answer.isPro}}" class="cons fi-x"></i>
+                         {{answer.reason}}</p>
                     </div>
                      <div class="large-6 columns">
                   <small class="list-group-item-text">
@@ -71,6 +75,7 @@
               </small>
                 </div>
                   </div>
+                  <button ng-show="amount<enquire.answers.length" class="button small" ng-click="loadMore()">Load more</button>
                 </div>
             </div>
  

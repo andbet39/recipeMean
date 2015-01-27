@@ -5,6 +5,14 @@ angular.module('answers').controller('AnswersController', ['$scope', '$statePara
 	function($scope, $stateParams, $location, Authentication, Answers) {
 		$scope.authentication = Authentication;
 
+
+		$scope.amount=2;
+
+		$scope.loadMore = function(){
+
+			$scope.amount +=5;
+		}
+
 		// Create new Answer
 		$scope.createAnswer = function(enquire) {
 			// Create new Answer object
@@ -18,16 +26,7 @@ angular.module('answers').controller('AnswersController', ['$scope', '$statePara
 			enquire.answers.unshift(answer);
 			$scope.reason ='';
 			$scope.isPro ='';
-			// Redirect after save
-			/*
-			answer.$save(function(response) {
-				$location.path('answers/' + response._id);
-				$scope.reason ='';
-				$scope.isPro ='';
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-*/
+
 		};
 
 		// Create new Answer
