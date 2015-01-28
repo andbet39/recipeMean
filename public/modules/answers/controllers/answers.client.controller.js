@@ -11,7 +11,7 @@ angular.module('answers').controller('AnswersController', ['$scope', '$statePara
 		$scope.loadMore = function(){
 
 			$scope.amount +=5;
-		}
+		};
 
 		// Create new Answer
 		$scope.createAnswer = function(enquire) {

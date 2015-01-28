@@ -8,6 +8,24 @@ var mongoose = require('mongoose'),
 	Enquire = mongoose.model('Enquire'),
 	_ = require('lodash');
 
+
+exports.increseVisitCounter = function (req,res){
+
+	var conditions = { '_id' : req.params.enquireId }; 
+	var update = {$inc : {visit : 1}}; 
+
+
+	Enquire.update(conditions, update,	function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.status(200).send();
+		}
+	});
+	 
+};
 /**
  * Create a Enquire
  */

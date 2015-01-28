@@ -19,5 +19,5 @@ module.exports = function(app) {
 
 	// Finish by binding the Answer middleware
 	app.param('answerId', answers.answerByID);
-	app.param('enquireId', answers.answerByEnquireID);
+	//app.param('enquireId', answers.answerByEnquireID);
 };

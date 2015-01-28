@@ -1,10 +1,10 @@
       <section data-ng-controller="EnquiresController" data-ng-init="find()">
       <div class="row">
           <div class="large-12 columns centered-text">
-              <h3>Latest Answer</h3>
+              <h2>Latest Questions</h2>
           </div>
       </div>
-           <div  class="large-8 large-centered columns" data-ng-repeat="enquire in enquires" data-ng-href="#!/enquires/{{enquire._id}}">
+           <div  class="large-8 large-centered columns" data-ng-repeat="enquire in enquires">
            <div class="row">
               <div class="large-2 columns small-3">
                     <img src="http://lorempixel.com/200/200/people/{{$index}}" />
@@ -13,12 +13,12 @@
               </div>
               
               <div class="large-10 columns">
-               <h3 data-ng-bind="enquire.title"></h3>
+               <a data-ng-href="#!/enquires/{{enquire._id}}"> <h3 data-ng-bind="enquire.title"></h3></a>
                 <p data-ng-bind="enquire.text"> </p>
                 <div class="row large-6 columns">
                 
                 <ul class=" inline-list">
-                   <li>Ci sono {{enquire.answers.length}} risposte</a></li>
+                   <li>Visto {{enquire.visit}} volte con {{enquire.answers.length}} risposte</a></li>
                 </ul>
                 </div>
                 <div class="large-6 columns">

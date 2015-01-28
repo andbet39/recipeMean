@@ -77,7 +77,22 @@ angular.module('enquires').controller('EnquiresController', ['$scope','$http', '
 		$scope.findOne = function() {
 			$scope.enquire = Enquires.get({ 
 				enquireId: $stateParams.enquireId
-			});
+			})
+			.$promise.then(
+				function (enquire) {
+				   $http.get('/enquires/addVisit/'+ enquire._id).
+					  success(function(data, status, headers, config) {
+					  	console.log('visit counter updated');
+ 					  }).
+					  error(function(data, status, headers, config) {
+					    // called asynchronously if an error occurs
+					    // or server returns response with an error status.
+					});
+				  $scope.loadAnswer(enquire);
+				  $scope.enquire=enquire;
+
+				  console.log(enquire)
+				});
 		};
 	}
 ]);

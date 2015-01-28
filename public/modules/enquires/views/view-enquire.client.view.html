@@ -1,21 +1,55 @@
-<section data-ng-controller="EnquiresController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1 data-ng-bind="enquire.title"></h1>
-	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == enquire.user._id))">
-		<a class="btn btn-primary" href="/#!/enquires/{{enquire._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="enquire.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="enquire.user.displayName"></span>
-		</em>
-	</small>
-</section>
+	<div data-ng-controller="EnquiresController" data-ng-init="findOne()">
+		<div class="page-header">
+			<h1 data-ng-bind="enquire.title"></h1>
+			                <p data-ng-bind="enquire.text"> </p>
+
+		</div>
+	<!--	<div data-ng-show="((authentication.user) && (authentication.user._id == enquire.user._id))">
+			<a class="button" href="/#!/enquires/{{enquire._id}}/edit">
+				<i class="glyphicon glyphicon-edit"></i>
+			</a>
+			<a class="button" data-ng-click="remove();">
+				<i class="glyphicon glyphicon-trash"></i>
+			</a>
+		</div>-->
+		<small>
+			<em class="text-muted">
+				Posted on
+				<span data-ng-bind="enquire.created | date:'mediumDate'"></span>
+				by
+				<span data-ng-bind="enquire.user.displayName"></span>
+			</em>
+		</small>
+		  <div class="row ">
+	          <div class="large-10 large-offset-2 columns">
+	              <div class="row" >
+	               
+	                <br>
+	                 <h5>Latest Pro&Cons</h5>
+	                <div class="row" ng-repeat="answer in enquire.answers" class="answer">
+	                   
+	                  <div class="large-2 columns small-3">      
+	                    <p>
+	                      <a class="th" href="../img/demos/demo2.png">
+	                      <img src="http://lorempixel.com/200/200/people/{{$index}}" />
+	                      </a>
+	                    </p>
+	                  </div>
+	                    <div class="large-10 columns"><p>
+	                      <i ng-show="{{answer.isPro}}" class="pro fi-check"></i>
+	                      <i ng-hide="{{answer.isPro}}" class="cons fi-x"></i>
+	                         {{answer.reason}}</p>
+	                    </div>
+	                     <div class="large-6 columns">
+	                  <small class="list-group-item-text">
+	                  Posted on
+	                  <span data-ng-bind="answer.created | date:'medium'"></span>
+	              </small>
+	                </div>
+	                  </div>
+	                  <button ng-show="amount<enquire.answers.length" class="button small" ng-click="loadMore()">Load more</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	 

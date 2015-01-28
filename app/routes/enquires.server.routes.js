@@ -13,6 +13,9 @@ module.exports = function(app) {
 		.get(enquires.read)
 		.put(users.requiresLogin, enquires.hasAuthorization, enquires.update)
 		.delete(users.requiresLogin, enquires.hasAuthorization, enquires.delete);
+	
+	app.route('/enquires/addVisit/:enquireId')
+		.get(enquires.increseVisitCounter);
 
 	// Finish by binding the Enquire middleware
 	app.param('enquireId', enquires.enquireByID);
