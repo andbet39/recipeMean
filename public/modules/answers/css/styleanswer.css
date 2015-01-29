@@ -1,11 +1,11 @@
 .pro {
-font-size: 30px;
+font-size: 20px;
 text-shadow: 0 1px 3px rgba(0,0,0,0.25);
 color: #01A916;
 }
 
 .cons {
-font-size: 30px;
+font-size: 20px;
 text-shadow: 0 1px 3px rgba(0,0,0,0.25);
 color:#EF4B4B;
 }

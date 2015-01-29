@@ -6,8 +6,8 @@ module.exports = {
 		title: 'recipeMean - Development Environment'
 	},
 	facebook: {
-		clientID: process.env.FACEBOOK_ID || 'APP_ID',
-		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+		clientID: process.env.FACEBOOK_ID || '1548375382086269',
+		clientSecret: process.env.FACEBOOK_SECRET || 'dbdfeee2870de1ac8d3fc94fa41f6876',
 		callbackURL: '/auth/facebook/callback'
 	},
 	twitter: {

@@ -91,7 +91,7 @@ angular.module('enquires').controller('EnquiresController', ['$scope','$http', '
 				  $scope.loadAnswer(enquire);
 				  $scope.enquire=enquire;
 
-				  console.log(enquire)
+				  console.log(enquire);
 				});
 		};
 	}
