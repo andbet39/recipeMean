@@ -17,6 +17,9 @@ module.exports = function(app) {
 	app.route('/enquireAnswer/:enquireId')
 		.get(answers.answerByEnquireID);
 
+
+
+
 	// Finish by binding the Answer middleware
 	app.param('answerId', answers.answerByID);
 	//app.param('enquireId', answers.answerByEnquireID);

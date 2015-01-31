@@ -36,4 +36,8 @@ var EnquireSchema = new Schema({
 	}
 });
 
+
+EnquireSchema.index({ title: 'text' });
+EnquireSchema.index({ text: 'text' });
+
 mongoose.model('Enquire', EnquireSchema);

@@ -1,0 +1,69 @@
+ <div  class="large-8 large-centered columns" data-ng-repeat="enquire in enquires">
+         
+
+          <div class="row">
+      <div class="[ col-xs-12 col-sm-offset-1 col-sm-8 ]">
+          <div class="[ panel panel-default ] panel-google-plus">
+              <div class="panel-heading">
+                   <img class="img-circle pull-left" src="http://lorempixel.com/70/70/people/{{$index}}" />
+                    <a data-ng-href="#!/enquires/{{enquire._id}}"> <h3 data-ng-bind="enquire.title"></h3></a>
+                  <h5><span>{{enquire.user.displayName}}</span> - <span data-ng-bind="enquire.created | date:'medium'"></span></h5>
+              </div>
+              <div class="panel-body">
+                  <p data-ng-bind="enquire.text"> </p>
+              </div>
+               
+              
+              <div class="panel-google-plus-comment" data-ng-controller="AnswersController" data-ng-init="loadAnswer(enquire)">
+              <div class="panel panel-default widget">
+            <div class="panel-heading"><h3 class="panel-title">
+                    Insert your Comment</h3>
+                  <form class="form-inline" data-ng-submit="createAnswer(enquire)" >
+                      
+                                <label class="radio-inline">
+                                  <input type="radio"   value="true" ng-model="answer.isPro"> Pro
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio"  value="false" ng-model="answer.isPro"> Con
+                                </label>
+                         
+                          <div class="form-group">
+                            <input ttype="text" name="answer.reason" ng-model="answer.reason" placeholder="Reason" class="form-control" >
+                          </div>
+                          <button type="submit" class="btn btn-success">Vote</button>
+                  </form>
+                
+                 
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                   <li class="list-group-item" ng-repeat="answer in enquire.answers | limitTo:amount">
+                        <div class="row">
+                            <div class="col-xs-2 col-md-1">
+                                <!--<img src="http://lorempixel.com/80/80/people/{{$index}}" class="img-circle img-responsive" alt="" />-->
+                                   <i ng-show="{{answer.isPro}}" class="pull-left pro glyphicon glyphicon-ok">   </i>
+                        <i ng-hide="{{answer.isPro}}" class="pull-left cons glyphicon glyphicon-remove">  </i></div>
+                            <div class="col-xs-10 col-md-11">
+                                <div>
+                                    
+                                    <div class="mic-info">
+                                        By: <a href="#">Bhaumik Patel</a> <span data-ng-bind="enquire.created | date:'medium'">
+                                    </div>
+                                </div>
+                                <div class="comment-text">
+                                   {{answer.reason}} 
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </li>
+                </ul> 
+                <button class="btn btn-primary btn-sm btn-block" ng-show="amount < enquire.answers.length" ng-click="loadMore()"><span class="glyphicon glyphicon-refresh"></span> More</button>
+            </div>
+        </div>
+    </div>
+                   
+                 
+          
+      </div></div></div></div>
+  

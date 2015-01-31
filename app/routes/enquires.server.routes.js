@@ -17,6 +17,10 @@ module.exports = function(app) {
 	app.route('/enquires/addVisit/:enquireId')
 		.get(enquires.increseVisitCounter);
 
+
+	app.route('/enquires/search/:query')
+		.get(enquires.search);
+
 	// Finish by binding the Enquire middleware
 	app.param('enquireId', enquires.enquireByID);
 };

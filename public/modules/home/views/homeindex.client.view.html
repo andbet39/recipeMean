@@ -1,0 +1,23 @@
+<section data-ng-controller="HomeController">
+	<div data-ng-controller="EnquiresController">
+
+
+      <div class="container">
+      	<div class="row">
+      		<div class="col-lg-3" >
+      			<form >
+                  <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" ng-model="query">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="search()" type="button">
+                    <span class="glyphicon glyphicon-search"></span>
+                   </button>
+                   </span>
+                   </div><!-- /input-group -->
+              </div>
+      	</div>
+      </div>
+      <h2 ng-show="enquires">Searching result for {{query}}</h2>
+       <div listenquire></div>
+</div>
+</section>

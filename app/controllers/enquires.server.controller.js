@@ -26,6 +26,26 @@ exports.increseVisitCounter = function (req,res){
 	});
 	 
 };
+
+
+exports.search = function(req,res){
+	console.log('Queried Enquire for text  :' + req.params.query);
+
+	Enquire.find({ $text : { $search :  req.params.query } }, { score : { $meta: 'textScore' } })
+    .sort({ score : { $meta : 'textScore' } })
+    .exec(function(err, answers) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(answers);
+		}
+	});
+
+};
+
 /**
  * Create a Enquire
  */

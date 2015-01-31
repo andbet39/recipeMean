@@ -73,6 +73,20 @@ angular.module('enquires').controller('EnquiresController', ['$scope','$http', '
 			$scope.enquires = Enquires.query();
 		};
 
+		// Find a list of Enquires
+		$scope.search = function() {
+			console.log('Searching :' + this.query);
+			 $http.get('/enquires/search/'+ this.query).
+					  success(function(data, status, headers, config) {
+					  		$scope.enquires=data;
+ 					  }).
+					  error(function(data, status, headers, config) {
+					    // called asynchronously if an error occurs
+					    // or server returns response with an error status.
+					});
+		};
+
+
 		// Find existing Enquire
 		$scope.findOne = function() {
 			$scope.enquire = Enquires.get({ 

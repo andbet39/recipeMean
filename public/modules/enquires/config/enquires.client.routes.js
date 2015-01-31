@@ -20,6 +20,11 @@ angular.module('enquires').config(['$stateProvider',
 		state('editEnquire', {
 			url: '/enquires/:enquireId/edit',
 			templateUrl: 'modules/enquires/views/edit-enquire.client.view.html'
-		});
+		}).
+
+		state('searchEnquires', {
+			url: '/enquires/search/:query',
+			templateUrl: 'modules/enquires/views/search-enquires.client.view.html'
+		});	
 	}
 ]);
