@@ -89,6 +89,7 @@ angular.module('enquires').controller('EnquiresController', ['$scope','$http', '
 
 		// Find existing Enquire
 		$scope.findOne = function() {
+
 			$scope.enquire = Enquires.get({ 
 				enquireId: $stateParams.enquireId
 			})
@@ -104,6 +105,7 @@ angular.module('enquires').controller('EnquiresController', ['$scope','$http', '
 					});
 				  $scope.loadAnswer(enquire);
 				  $scope.enquire=enquire;
+				  $scope.title=enquire.title;
 
 				  console.log(enquire);
 				});
