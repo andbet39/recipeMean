@@ -21,11 +21,19 @@ var fs = require('fs'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
-	path = require('path');
+	path = require('path'),
+	seo = require('mean-seo');
 
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
+	console.log('Seo initialize');
+	
+	app.use(seo({
+	      cacheClient: 'disk', // Can be 'disk' or 'redis'
+	      cacheDuration: 2 * 60 * 60 * 24 * 1000, // In milliseconds for disk cache
+	}));
+
 
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
@@ -46,7 +54,14 @@ module.exports = function(db) {
 		next();
 	});
 
-	// Should be placed before express.static
+	 
+	app.use(seo({
+	    cacheClient: 'disk', // Can be 'disk' or 'redis'
+	    cacheDuration: 2 * 60 * 60 * 24 * 1000, // In milliseconds for disk cache
+	}));
+	
+
+		// Should be placed before express.static
 	app.use(compress({
 		filter: function(req, res) {
 			return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
