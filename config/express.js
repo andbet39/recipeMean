@@ -27,8 +27,9 @@ var fs = require('fs'),
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
-	console.log('Seo initialize');
 	
+	console.log('Seo initialize');
+
 	app.use(seo({
 	      cacheClient: 'disk', // Can be 'disk' or 'redis'
 	      cacheDuration: 2 * 60 * 60 * 24 * 1000, // In milliseconds for disk cache
@@ -55,11 +56,7 @@ module.exports = function(db) {
 	});
 
 	 
-	app.use(seo({
-	    cacheClient: 'disk', // Can be 'disk' or 'redis'
-	    cacheDuration: 2 * 60 * 60 * 24 * 1000, // In milliseconds for disk cache
-	}));
-	
+	 
 
 		// Should be placed before express.static
 	app.use(compress({
