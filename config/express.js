@@ -22,7 +22,9 @@ var fs = require('fs'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
 	path = require('path'),
-	seo = require('mean-seo');
+	seo = require('mean-seo'),
+	busboyBodyParser = require('busboy-body-parser');
+	var Grid = require('gridfs-stream');
 
 module.exports = function(db) {
 	// Initialize express app
@@ -56,7 +58,7 @@ module.exports = function(db) {
 	});
 
 	 
-	 
+
 
 		// Should be placed before express.static
 	app.use(compress({
@@ -92,7 +94,10 @@ module.exports = function(db) {
 		extended: true
 	}));
 	app.use(bodyParser.json());
-	app.use(methodOverride());
+
+	app.use(busboyBodyParser());
+
+ 	app.use(methodOverride());
 
 	// CookieParser should be above session
 	app.use(cookieParser());
@@ -107,6 +112,9 @@ module.exports = function(db) {
 			collection: config.sessionCollection
 		})
 	}));
+
+
+
 
 	// use passport session
 	app.use(passport.initialize());
