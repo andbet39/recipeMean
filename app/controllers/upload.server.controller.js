@@ -1,35 +1,22 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
+ 
 var mongoose = require('mongoose'),
     _ = require('lodash');
 
-	var Grid = require('gridfs-stream');
-	//var multiparty = require('multiparty');
+var Grid = require('gridfs-stream');
+Grid.mongo = mongoose.mongo;
+var gfs = new Grid(mongoose.connection.db);
 
-	Grid.mongo = mongoose.mongo;
-	var gfs = new Grid(mongoose.connection.db);
- 
-var Busboy = require('busboy');
- 
- 	
-/**
- * Create a Upload
- */
 exports.create = function(req, res) {
 
-	     
-	   	console.log(req.files);
-	   	
+	     	   	
 	    	var part = req.files.filefield;
-                console.log(req);
-
+ 
                 var writeStream = gfs.createWriteStream({
-                     filename: part.name,
-    
-                     content_type:part.mimetype
+                    filename: part.name,
+    				mode: 'w',
+                    content_type:part.mimetype
                 });
 
 
@@ -39,62 +26,43 @@ exports.create = function(req, res) {
 					});
                 });
                 
-                req.files.filefield.pipe(writeStream);
+                writeStream.write(part.data);
+
+                writeStream.end();
 
 };
 
-/**
- * Show the current Upload
- */
+ 
 exports.read = function(req, res) {
 
-	var readstream = gfs.createReadStream({
-	  filename: 'ISS.jpg'
-	});
-	 
-	//error handling, e.g. file does not exist 
+	gfs.files.find({ filename: req.params.filename }).toArray(function (err, files) {
 
-	console.log('file readed');
+ 	    if(files.length===0){
+			return res.status(400).send({
+				message: 'File not found'
+			});
+ 	    }
+	
+		res.writeHead(200, {'Content-Type': files[0].contentType});
+		
+		var readstream = gfs.createReadStream({
+			  filename: files[0].filename
+		});
 
-
-
-	res.writeHead(200, {
-       
-    });
-    
-    readstream.on('data', function(data) {
-        res.write(data);
-    });
-    
-    readstream.on('end', function() {
-        res.end();        
-    });
+	    readstream.on('data', function(data) {
+	        res.write(data);
+	    });
+	    
+	    readstream.on('end', function() {
+	        res.end();        
+	    });
 
 		readstream.on('error', function (err) {
 		  console.log('An error occurred!', err);
 		  throw err;
 		});
-
-
-};
-
-/**
- * Update a Upload
- */
-exports.update = function(req, res) {
+	});
 
 };
 
-/**
- * Delete an Upload
- */
-exports.delete = function(req, res) {
 
-};
-
-/**
- * List of Uploads
- */
-exports.list = function(req, res) {
-
-};

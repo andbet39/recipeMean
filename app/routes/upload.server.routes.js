@@ -2,12 +2,12 @@
 
 module.exports = function(app) {
 		var upload  = require('../../app/controllers/upload.server.controller');
-		var multer  = require('multer');
-
-	app.use(multer({ dest: '/upload'}));
 
 
-	app.route('/upload')
-		.post(upload.create)
+	app.route('/upload/:filename')
 		.get(upload.read);
-	};
+	
+	
+	app.route('/upload')
+		.post(upload.create);
+};
